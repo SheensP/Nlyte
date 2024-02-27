@@ -98,3 +98,11 @@ ul {
     border-top: 1px solid #e2e2e2;
     padding: 20px 0px 10px;
 }
+
+.searchTxt {
+    width: 200px;
+}
+
+.searchTxt:disabled {
+    background-color:#999999;
+}

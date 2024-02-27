@@ -52,13 +52,16 @@ class App {
     }
 
     SearchTxtKeyup(searchInput) {
-        clearTimeout(this.timer);
-        this.timer = setTimeout(() => this.SearchWord(searchInput), 500);
+        var text = searchInput.value;
+        if (text.length >= 3) {
+            clearTimeout(this.timer);
+            this.timer = setTimeout(() => this.SearchWord(text), 300);
+        } else { this.searchResults.Clear(); }
     }
 
-    SearchWord(searchInput) {
+    SearchWord(searchText) {
         this.searchResults.Clear();
-        DataService.WordSearch(this.selectedBookId, searchInput.value).then(data => {
+        DataService.WordSearch(this.selectedBookId, searchText).then(data => {
             data.forEach(word => {
                 this.searchResults.CreateSearchResult(word);
             });
