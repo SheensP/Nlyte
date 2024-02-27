@@ -23,7 +23,8 @@ vel elementum risus.";
 
         private BookWordsRepository repository;
 
-        public BooksWordsRepositoryTest() {
+        public BooksWordsRepositoryTest()
+        {
             repository = new BookWordsRepository();
             repository.Add(SAMPLE_TEXT);
         }

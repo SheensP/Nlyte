@@ -1,5 +1,6 @@
 ﻿using Library.Models;
 using Library.Repositories;
+using Library.Data;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Library.Controllers
@@ -16,32 +17,46 @@ namespace Library.Controllers
     [Route("api/[controller]")]
     public class BooksController : ControllerBase
     {
-        private static readonly BookRepository repository = new BookRepository();
+        private static readonly BookRepository _bookRepository = new BookRepository();
+        private static readonly BookWordsRepository _wordsRepository = new BookWordsRepository();
 
         [HttpGet]
         public IEnumerable<Book> Get()
         {
             // Return the list of book ids and titles
-            throw new NotImplementedException();
+            return _bookRepository.GetBooks();
         }
 
         [HttpGet("{id:int}")]
         public IActionResult GetTopWords(int id)
         {
-            // Return a list of the 10 most common words (>3 letters) 
-            throw new NotImplementedException();
+            // Return a list of the 10 most common words (>5 letters) 
+            var book = BookStorage.GetBook(id);
+
+            _wordsRepository.Add(book.Content);
+            
+            return Ok(_wordsRepository.MostCommonWords());
         }
 
         [HttpGet("{id:int}/count/{word}")]
         public IActionResult WordCount(int id, string word)
         {
-            throw new NotImplementedException();
+            var book = BookStorage.GetBook(id);
+
+            _wordsRepository.Add(book.Content);
+
+            return Ok(_wordsRepository.GetCount(word));
         }
 
         [HttpGet("{id:int}/search/{query}")]
         public IActionResult SearchForWord(int id, string query)
         {
-            throw new NotImplementedException();
+            var book = BookStorage.GetBook(id);
+
+            _wordsRepository.Add(book.Content);
+
+            return Ok(_wordsRepository.Search(query));
         }
+
     }
 }

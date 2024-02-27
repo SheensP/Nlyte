@@ -5,13 +5,25 @@
 </head>
 <body>
 <div class="output">
-    <div id="titles"></div>
-    <div id="results">
-        <div id="searchArea">
-            <input type="text" id="searchTxt"  disabled />
-            <input type="button" value="Search" id="searchBtn" disabled />
+    <div id="titles" class="titles panel">
+        <div class="title">Books</div>
+        <ul id="titles-list">
+        </ul>
+    </div>
+    <div id="results" class="results panel">
+        <div id="commonWords" class="commonWords">
+            <div class="title">Most common 10 words: </div>
+            <ul id="commonWords-list"></ul>
+
         </div>
-        <div id="words"></div>
+        <div id="searchArea" class="searchArea">
+            <span class="title">Search:</span>
+            <input type="text" id="searchTxt"  disabled keyup="SearchWord()"/>
+        </div>
+        <div id="searchResults" class="searchResults">
+            <div class="title">Search Results: </div>
+            <ul id="searchResults-list"></ul>
+        </div>
     </div>
 </div>
 </body>
